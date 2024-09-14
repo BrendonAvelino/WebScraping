@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visualizar Cadastros</title>
+    <link rel="stylesheet" href="css/visualizar.css"> <!-- Link para o arquivo CSS específico -->
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="list-container">
+            <h1>Cadastros</h1>
+            <ul id="listaUsuarios"></ul>
+        </div>
+    </div>
+
+    <script>
+        const socket = io();
+        const listaUsuarios = document.getElementById('listaUsuarios');
+
+         // Solicita ao servidor para limpar os dados quando a página é carregada
+         window.addEventListener('load', () => {
+            socket.emit('limpar-dados');
+        });
+        
+        // Recebe a lista de usuários e atualiza a página
+        socket.on('atualizar-usuarios', (usuarios) => {
+            listaUsuarios.innerHTML = '';
+            usuarios.forEach(usuario => {
+                const li = document.createElement('li');
+                li.textContent = `Nome: ${usuario.nome}, Email: ${usuario.email}, Senha: ${usuario.senha}`;
+                listaUsuarios.appendChild(li);
+            });
+        });
+    </script>
+</body>
+</html>
