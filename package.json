@@ -3,18 +3,13 @@
     "express": "^4.21.0",
     "socket.io": "^4.7.5"
   },
-  "name": "capturadeinformacoes",
+  "name": "WebScraping",
   "version": "1.0.0",
-  "main": "script.js",
   "scripts": {
-    "build": "expo build:web",
-    "prebuild": "npm install expo-cli"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "expo-cli": "^6.3.12"
-  }
+  "description": ""
 }
