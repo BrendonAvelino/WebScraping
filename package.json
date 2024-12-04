@@ -1,18 +1,21 @@
 {
-  "dependencies": {
-    "express": "^4.21.1",
-    "node-fetch": "^2.7.0",
-    "proxy-agent": "^6.4.0",
-    "socket.io": "^4.8.1"
-  },
-  "name": "WebScraping",
+  "name": "nome-do-seu-projeto",
   "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "build": "npm install -g expo-cli && expo export -p web",
+    "dev": "expo start",
+    "start": "expo start"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "type": "module"
+  "dependencies": {
+    "expo": "^48.0.0"
+    
+  },
+  "devDependencies": {
+    "expo-cli": "^6.0.0"
+  },
+  "engines": {
+    "node": "v20.13.1"  
+  },
+  "license": "MIT"
 }
