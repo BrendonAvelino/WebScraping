@@ -1,21 +1,16 @@
 {
-  "name": "nome-do-seu-projeto",
+  "name": "seu-projeto",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
+  "type": "module",
   "scripts": {
-    "build": "npm install -g expo-cli && expo export -p web",
-    "dev": "expo start",
-    "start": "expo start"
+    "start": "node server.js"
   },
   "dependencies": {
-    "expo": "^48.0.0"
-    
-  },
-  "devDependencies": {
-    "expo-cli": "^6.0.0"
-  },
-  "engines": {
-    "node": "v20.13.1"  
-  },
-  "license": "MIT"
+    "express": "^4.17.1",
+    "http": "^0.0.1",
+    "socket.io": "^4.0.0",
+    "proxy-agent": "^5.0.0",
+    "node-fetch": "^3.2.0"
+  }
 }
