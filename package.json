@@ -1,7 +1,9 @@
 {
   "dependencies": {
-    "express": "^4.21.0",
-    "socket.io": "^4.7.5"
+    "express": "^4.21.1",
+    "node-fetch": "^2.7.0",
+    "proxy-agent": "^6.4.0",
+    "socket.io": "^4.8.1"
   },
   "name": "WebScraping",
   "version": "1.0.0",
@@ -11,5 +13,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "type": "module"
 }

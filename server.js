@@ -1,19 +1,39 @@
-const express = require('express');
-const http = require('http');
-const socketIo = require('socket.io');
-const path = require('path');
-const fs = require('fs'); // Módulo para manipulação de arquivos
+import express from 'express';
+import http from 'http';
+import { Server } from 'socket.io';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import fs from 'fs';
+import ProxyAgent from 'proxy-agent';
+import fetch from 'node-fetch';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = new Server(server);
 const port = 3000;
+
+// Lista de proxies para rotação
+const proxies = [
+    'http://123.123.123.123:8080',
+    'http://234.234.234.234:8080',
+    'http://345.345.345.345:8080'
+];
+
+// Função para obter um proxy aleatório
+function getRandomProxy() {
+    return proxies[Math.floor(Math.random() * proxies.length)];
+}
 
 // Middleware para servir arquivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware para interpretar JSON
 app.use(express.json());
+
+
 
 let usuarios = [];
 
@@ -57,6 +77,23 @@ io.on('connection', (socket) => {
     });
 });
 
+// Endpoint para chamadas externas usando proxy
+app.get('/api', async (req, res) => {
+    const proxyUrl = getRandomProxy(); // Seleciona um proxy aleatório
+    console.log(`Usando proxy: ${proxyUrl}`);
+
+    try {
+        const agent = new ProxyAgent(proxyUrl);
+        const response = await fetch('https://example.com', { agent });
+        const data = await response.text();
+        res.send(data);
+    } catch (error) {
+        console.error('Erro na requisição externa:', error);
+        res.status(500).send('Erro ao buscar dados externos.');
+    }
+});
+
+// Iniciar o servidor
 server.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
 });
